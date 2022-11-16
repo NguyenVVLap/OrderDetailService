@@ -42,4 +42,13 @@ public class OrderDetailRestController {
 		orderDetailService.save(orderDetail);
 		return orderDetail;
 	}
+
+	@DeleteMapping("/orderDetail/{idOrder}")
+	public ResponseEntity<String> deleteOrderDetail(@PathVariable long idOrder) {
+		List<OrderDetail> orderDetails = orderDetailService.getOrderDetailsByOrderId(idOrder);
+		for (OrderDetail od: orderDetails) {
+			orderDetailService.delete(od.getId());
+		}
+		return ResponseEntity.ok().body("Deleted");
+	}
 }
