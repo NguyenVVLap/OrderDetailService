@@ -33,4 +33,13 @@ public class OrderDetailRestController {
 		return ResponseEntity.ok().body(orderDetailService.getOrderDetailsByOrderId(id));
 	}
 
+	@PutMapping("/orderDetail")
+	public OrderDetail updateOrderDetail(@RequestBody OrderDetail orderDetail
+			, @RequestParam("idOrder") long idOrder
+			, @RequestParam("idColor") long idColor) {
+		orderDetail.setOrderId(idOrder);
+		orderDetail.setColorId(idColor);
+		orderDetailService.save(orderDetail);
+		return orderDetail;
+	}
 }
